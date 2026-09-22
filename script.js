@@ -156,8 +156,8 @@
   // ---- fixed bar: adaptive scroll toggling ----
   var bar = document.getElementById('site-bar');
 
-  var ENTER = 80;  // switch to compact past this
-  var EXIT  = 40;  // switch back once above this
+  var ENTER = 80;
+  var EXIT  = 40;
   var collapsed = false;
 
   function setCollapsed(next){
