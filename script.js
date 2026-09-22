@@ -153,13 +153,11 @@
     mainContent.hidden = false;
   });
 
-  // ---- fixed bar: only its CONTENTS swap on scroll, its own box never resizes,
-  // so there is nothing here that can ever shift the page or fight the scroll. ----
+  // ---- fixed bar: adaptive scroll toggling ----
   var bar = document.getElementById('site-bar');
-  var mq = window.matchMedia('(max-width: 640px)');
 
   var ENTER = 80;  // switch to compact past this
-  var EXIT  = 40;  // only switch back once above this (hysteresis avoids flicker at the edge)
+  var EXIT  = 40;  // switch back once above this
   var collapsed = false;
 
   function setCollapsed(next){
@@ -174,8 +172,7 @@
     if(ticking) return;
     ticking = true;
     requestAnimationFrame(function(){
-      // Removed the mq.matches check so scrolling logic runs on all screen sizes
-      var y = window.scrollY;
+      var y = window.scrollY || window.pageYOffset;
       if(!collapsed && y > ENTER){ setCollapsed(true); }
       else if(collapsed && y < EXIT){ setCollapsed(false); }
       

@@ -118,7 +118,7 @@ select.ink-select{
 
 .icon-gear{ width:16px; height:16px; display:block; }
 
-/* ============ FIXED BAR (constant height, contents swap — nothing ever resizes) ============ */
+/* ============ FIXED BAR ============ */
 #bar-spacer{ height: var(--bar-h); }
 
 header#site-bar{
@@ -143,12 +143,14 @@ header#site-bar{
   justify-content:flex-end;
   align-items:center;
   gap:.6rem;
+  transition: opacity .2s ease;
 }
 .bar-compact{
   display:none;
   align-items:center;
   justify-content: space-between;
   position: relative;
+  transition: opacity .2s ease;
 }
 .compact-title{
   position:absolute; left:50%; top:50%;
@@ -178,8 +180,12 @@ header#site-bar.scrolled .bar-compact{ display:flex; }
 .burger.open span:nth-child(2){ opacity:0; }
 .burger.open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
 
-/* ============ HERO (normal flow — scrolls away under the fixed bar, no JS involved) ============ */
-.hero{ text-align:center; padding: 1.8rem 1.5rem 0; }
+/* ============ HERO (Adaptive smooth fade, maintains layout height to prevent scroll thrashing) ============ */
+.hero{
+  text-align:center;
+  padding: 1.8rem 1.5rem 0;
+  transition: opacity .25s ease, transform .25s ease;
+}
 .hero-inner{ max-width: 1180px; margin: 0 auto; }
 h1.masthead{
   font-family: var(--font-display);
@@ -312,10 +318,23 @@ main{ position:relative; z-index:1; max-width: 1180px; margin: 0 auto; padding: 
   *{ transition-duration:.001ms !important; animation-duration:.001ms !important; }
 }
 
-body.nav-collapsed .hero{ display:none; }
+/* Smoothly hide hero content on scroll without changing page layout height */
+body.nav-collapsed .hero{
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+}
 
 @media (max-width: 640px){
   header#site-bar .bar-full{ display:none !important; }
   header#site-bar .bar-compact{ display:flex !important; }
-  /* The line hiding the hero on mobile was removed here */
+
+  /* Fade compact title in on mobile only after scrolling */
+  header#site-bar .compact-title{
+    opacity: 0;
+    transition: opacity .2s ease;
+  }
+  header#site-bar.scrolled .compact-title{
+    opacity: 1;
+  }
 }
