@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>We Recover</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700;900&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="eink-flash" id="einkFlash"></div>
+
+<header id="site-bar">
+  <div class="bar-inner">
+
+    <div class="bar-full" id="barFull">
+      <select class="ink-select" id="stateSelect" aria-label="Select your state"></select>
+      <button class="neo-btn ink-btn" data-page="mystuff">My Stuff</button>
+      <button class="neo-btn ink-btn" data-page="login">Login</button>
+      <button class="neo-btn ink-btn icon-btn" data-page="settings" aria-label="Settings">
+        <svg class="icon-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 13a7.97 7.97 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a8.1 8.1 0 0 0-1.7-1L14.9 3h-4l-.4 2.9a8.1 8.1 0 0 0-1.7 1l-2.5-1-2 3.5L6.4 11a7.97 7.97 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a8.1 8.1 0 0 0 1.7 1l.4 2.9h4l.4-2.9a8.1 8.1 0 0 0 1.7-1l2.5 1 2-3.5-2.1-1.6Z"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="bar-compact" id="barCompact">
+      <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="compact-title">WE RECOVER</div>
+      <div class="compact-right">
+        <button class="neo-btn ink-btn small" data-page="login">Login</button>
+        <button class="neo-btn ink-btn icon-btn small" data-page="settings" aria-label="Settings">
+          <svg class="icon-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 13a7.97 7.97 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a8.1 8.1 0 0 0-1.7-1L14.9 3h-4l-.4 2.9a8.1 8.1 0 0 0-1.7 1l-2.5-1-2 3.5L6.4 11a7.97 7.97 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a8.1 8.1 0 0 0 1.7 1l.4 2.9h4l.4-2.9a8.1 8.1 0 0 0 1.7-1l2.5 1 2-3.5-2.1-1.6Z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<div id="bar-spacer"></div>
+
+<div class="overlay" id="overlay"></div>
+<aside class="burger-panel" id="burgerPanel" aria-label="Site menu">
+  <p class="bp-title">WE RECOVER</p>
+
+  <div class="bp-section">
+    <p class="bp-label">STATE</p>
+    <div class="bp-select-row">
+      <select class="ink-select" id="stateSelectMobile" aria-label="Select your state"></select>
+    </div>
+  </div>
+
+  <div class="bp-section">
+    <button class="neo-btn ink-btn bp-btn" data-page="mystuff">My Stuff</button>
+  </div>
+
+  <div class="bp-section" id="bpCategories">
+    <p class="bp-label">BROWSE</p>
+  </div>
+</aside>
+
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <h1 class="masthead">WE RECOVER</h1>
+    <nav class="category-bar" id="categoryBar" aria-label="Categories"></nav>
+  </div>
+</section>
+
+<main id="mainContent">
+
+  <section class="welcome">
+    <p>We Recover is a plain-spoken guide for the practical parts of starting over &mdash; health coverage, housing, work, and the paperwork in between. We keep it organized by what you actually need this week, not by which office it belongs to.</p>
+  </section>
+
+  <section class="testimonial neo-pressed">
+    <p>&ldquo;I didn&rsquo;t need another hotline. I needed one page that told me where to go on a Tuesday. This was that page.&rdquo;</p>
+    <cite>&mdash; Jamie R., Tulsa, Oklahoma</cite>
+  </section>
+
+  <section class="article-card neo-raised">
+    <p class="article-eyebrow">Featured</p>
+    <h2>The Quiet Work of Rebuilding a Life, One Appointment at a Time</h2>
+    <p class="excerpt">A look at how community health workers in Oklahoma are stitching together housing, benefits, and follow-up care for people leaving treatment &mdash; and why the hardest part is rarely the paperwork itself.</p>
+    <p class="article-meta">
+      <span>By Andrea Colton</span>
+      <span class="dot">&middot;</span>
+      <span>The Oklahoman</span>
+    </p>
+  </section>
+
+</main>
+
+<div class="blank-page" id="blankPage" hidden>
+  <h2 id="blankTitle">My Stuff</h2>
+  <p>This page is still being built.</p>
+  <button class="neo-btn neo-raised" id="blankBack">Back to We Recover</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
