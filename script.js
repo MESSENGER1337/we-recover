@@ -10,6 +10,7 @@
   };
 
   function buildStateOptions(select){
+    if(!select) return;
     STATES.forEach(function(state){
       var opt = document.createElement('option');
       opt.value = state;
@@ -22,42 +23,49 @@
   buildStateOptions(document.getElementById('stateSelect'));
   buildStateOptions(document.getElementById('stateSelectMobile'));
 
+  // ---- Navigation to standalone blank.html page ----
+  function navigateToBlank(title){
+    window.location.href = 'blank.html?page=' + encodeURIComponent(title);
+  }
+
   // ---- category bar (desktop dropdowns) ----
   var catBar = document.getElementById('categoryBar');
-  Object.keys(CATEGORIES).forEach(function(name){
-    var wrap = document.createElement('div');
-    wrap.className = 'cat-item';
+  if(catBar){
+    Object.keys(CATEGORIES).forEach(function(name){
+      var wrap = document.createElement('div');
+      wrap.className = 'cat-item';
 
-    var btn = document.createElement('button');
-    btn.className = 'cat-btn';
-    btn.setAttribute('aria-expanded','false');
-    btn.innerHTML = name + ' <svg class="cat-chevron" viewBox="0 0 10 7" fill="none"><path d="M0 0L5 7L10 0Z" fill="currentColor"/></svg>';
+      var btn = document.createElement('button');
+      btn.className = 'cat-btn';
+      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML = name + ' <svg class="cat-chevron" viewBox="0 0 10 7" fill="none"><path d="M0 0L5 7L10 0Z" fill="currentColor"/></svg>';
 
-    var panel = document.createElement('div');
-    panel.className = 'cat-panel neo-raised';
-    CATEGORIES[name].forEach(function(item){
-      var b = document.createElement('button');
-      b.textContent = item;
-      b.addEventListener('click', function(){
-        closeAllCatPanels();
-        showBlank(item);
+      var panel = document.createElement('div');
+      panel.className = 'cat-panel neo-raised';
+      CATEGORIES[name].forEach(function(item){
+        var b = document.createElement('button');
+        b.textContent = item;
+        b.addEventListener('click', function(){
+          closeAllCatPanels();
+          navigateToBlank(item);
+        });
+        panel.appendChild(b);
       });
-      panel.appendChild(b);
-    });
 
-    btn.addEventListener('click', function(){
-      var isOpen = panel.classList.contains('open');
-      closeAllCatPanels();
-      if(!isOpen){
-        panel.classList.add('open');
-        btn.setAttribute('aria-expanded','true');
-      }
-    });
+      btn.addEventListener('click', function(){
+        var isOpen = panel.classList.contains('open');
+        closeAllCatPanels();
+        if(!isOpen){
+          panel.classList.add('open');
+          btn.setAttribute('aria-expanded','true');
+        }
+      });
 
-    wrap.appendChild(btn);
-    wrap.appendChild(panel);
-    catBar.appendChild(wrap);
-  });
+      wrap.appendChild(btn);
+      wrap.appendChild(panel);
+      catBar.appendChild(wrap);
+    });
+  }
 
   function closeAllCatPanels(){
     document.querySelectorAll('.cat-panel').forEach(function(p){ p.classList.remove('open'); });
@@ -69,30 +77,32 @@
 
   // ---- burger panel categories ----
   var bpCategories = document.getElementById('bpCategories');
-  Object.keys(CATEGORIES).forEach(function(name){
-    var cat = document.createElement('div');
-    cat.className = 'bp-cat';
+  if(bpCategories){
+    Object.keys(CATEGORIES).forEach(function(name){
+      var cat = document.createElement('div');
+      cat.className = 'bp-cat';
 
-    var head = document.createElement('button');
-    head.innerHTML = name + ' <svg class="cat-chevron" viewBox="0 0 10 7" fill="none"><path d="M0 0L5 7L10 0Z" fill="currentColor"/></svg>';
-    head.addEventListener('click', function(){ cat.classList.toggle('open'); });
+      var head = document.createElement('button');
+      head.innerHTML = name + ' <svg class="cat-chevron" viewBox="0 0 10 7" fill="none"><path d="M0 0L5 7L10 0Z" fill="currentColor"/></svg>';
+      head.addEventListener('click', function(){ cat.classList.toggle('open'); });
 
-    var sub = document.createElement('div');
-    sub.className = 'bp-sub';
-    CATEGORIES[name].forEach(function(item){
-      var b = document.createElement('button');
-      b.textContent = item;
-      b.addEventListener('click', function(){
-        closeBurger();
-        showBlank(item);
+      var sub = document.createElement('div');
+      sub.className = 'bp-sub';
+      CATEGORIES[name].forEach(function(item){
+        var b = document.createElement('button');
+        b.textContent = item;
+        b.addEventListener('click', function(){
+          closeBurger();
+          navigateToBlank(item);
+        });
+        sub.appendChild(b);
       });
-      sub.appendChild(b);
-    });
 
-    cat.appendChild(head);
-    cat.appendChild(sub);
-    bpCategories.appendChild(cat);
-  });
+      cat.appendChild(head);
+      cat.appendChild(sub);
+      bpCategories.appendChild(cat);
+    });
+  }
 
   // ---- burger open/close ----
   var burgerBtn = document.getElementById('burgerBtn');
@@ -111,74 +121,76 @@
     burgerBtn.classList.remove('open');
     burgerBtn.setAttribute('aria-expanded','false');
   }
-  burgerBtn.addEventListener('click', function(){
-    burgerPanel.classList.contains('open') ? closeBurger() : openBurger();
-  });
-  overlay.addEventListener('click', closeBurger);
+  if(burgerBtn){
+    burgerBtn.addEventListener('click', function(){
+      burgerPanel.classList.contains('open') ? closeBurger() : openBurger();
+    });
+  }
+  if(overlay){
+    overlay.addEventListener('click', closeBurger);
+  }
 
-  // ---- top-level nav buttons -> blank pages ----
+  // ---- top-level & footer nav buttons -> blank page ----
   document.querySelectorAll('[data-page]').forEach(function(btn){
-    btn.addEventListener('click', function(){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
       closeBurger();
-      var label = btn.textContent.trim() || btn.getAttribute('data-page');
-      showBlank(label);
+      var label = btn.getAttribute('data-page') || btn.textContent.trim();
+      navigateToBlank(label);
     });
   });
 
-  // ---- blank page view ----
-  var mainContent = document.getElementById('mainContent');
-  var hero = document.getElementById('hero');
-  var blankPage = document.getElementById('blankPage');
+  // ---- Initialize blank.html title from URL query params ----
   var blankTitle = document.getElementById('blankTitle');
-  var flash = document.getElementById('einkFlash');
-
-  function einkFlash(){
-    flash.classList.remove('flashing');
-    void flash.offsetWidth;
-    flash.classList.add('flashing');
+  if(blankTitle){
+    var params = new URLSearchParams(window.location.search);
+    var pageParam = params.get('page');
+    if(pageParam){
+      blankTitle.textContent = decodeURIComponent(pageParam);
+    }
   }
 
-  function showBlank(title){
-    einkFlash();
-    blankTitle.textContent = title;
-    hero.hidden = true;
-    mainContent.hidden = true;
-    blankPage.hidden = false;
-    window.scrollTo(0, 0);
+  // ---- Back button handler on blank.html ----
+  var blankBack = document.getElementById('blankBack');
+  if(blankBack){
+    blankBack.addEventListener('click', function(){
+      if(document.referrer && window.history.length > 1){
+        window.history.back();
+      } else {
+        window.location.href = 'index.html';
+      }
+    });
   }
-  document.getElementById('blankBack').addEventListener('click', function(){
-    einkFlash();
-    blankPage.hidden = true;
-    hero.hidden = false;
-    mainContent.hidden = false;
-  });
 
   // ---- fixed bar: adaptive scroll toggling ----
   var bar = document.getElementById('site-bar');
+  var hero = document.getElementById('hero');
 
-  var ENTER = 80;
-  var EXIT  = 40;
-  var collapsed = false;
+  if(bar && hero){
+    var ENTER = 80;
+    var EXIT  = 40;
+    var collapsed = false;
 
-  function setCollapsed(next){
-    if(next === collapsed) return;
-    collapsed = next;
-    bar.classList.toggle('scrolled', collapsed);
-    document.body.classList.toggle('nav-collapsed', collapsed);
+    function setCollapsed(next){
+      if(next === collapsed) return;
+      collapsed = next;
+      bar.classList.toggle('scrolled', collapsed);
+      document.body.classList.toggle('nav-collapsed', collapsed);
+    }
+
+    var ticking = false;
+    function onScroll(){
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        var y = window.scrollY || window.pageYOffset;
+        if(!collapsed && y > ENTER){ setCollapsed(true); }
+        else if(collapsed && y < EXIT){ setCollapsed(false); }
+        
+        ticking = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
   }
-
-  var ticking = false;
-  function onScroll(){
-    if(ticking) return;
-    ticking = true;
-    requestAnimationFrame(function(){
-      var y = window.scrollY || window.pageYOffset;
-      if(!collapsed && y > ENTER){ setCollapsed(true); }
-      else if(collapsed && y < EXIT){ setCollapsed(false); }
-      
-      ticking = false;
-    });
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
 
 })();
