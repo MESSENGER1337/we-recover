@@ -253,6 +253,76 @@ nav.category-bar{
 }
 .cat-panel button:hover{ background: var(--paper); color: var(--ink); }
 
+.category-dropdown-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+.category-dropdown-bar select {
+  background-color: #3b3a36;
+  color: #f4f3ef;
+  border: 1px solid #2b2a27;
+  width: auto;
+  min-width: 110px;
+  max-width: 145px;
+  text-overflow: ellipsis;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+@media (max-width: 680px) {
+  .category-dropdown-bar select {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* Hero category dropdown bar styling */
+.category-dropdown-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+/* Selector styling: softer dark charcoal background and compact widths */
+.ink-select,
+.category-dropdown-bar select,
+.bp-select-row select {
+  background-color: #3b3a36; /* Tone between newspaper cream and solid black */
+  color: #f4f3ef;
+  border: 1px solid #2b2a27;
+  border-radius: var(--radius, 6px);
+  padding: 0.45rem 0.65rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.category-dropdown-bar select {
+  width: auto;
+  min-width: 110px;
+  max-width: 145px;
+  text-overflow: ellipsis;
+}
+
+/* Stack dropdowns full-width on mobile viewports */
+@media (max-width: 680px) {
+  .category-dropdown-bar select {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
 /* ============ BURGER PANEL ============ */
 .overlay{
   position:fixed; inset:0;
@@ -412,6 +482,8 @@ main{ position:relative; z-index:1; max-width: 1180px; margin: 0 auto; padding: 
     grid-column: span 2;
   }
 }
+
+
 
 /* ============ FOOTER ============ */
 footer.site-footer{
