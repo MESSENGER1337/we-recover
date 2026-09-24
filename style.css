@@ -15,8 +15,10 @@
   --accent:          #465C3F;
   --accent-deep:     #303F2B;
   --accent-active:   #25855A; /* Bright green highlight for My Stuff checked state */
-  --select-dark:     #3B3A36;
-  --select-border:   #A9A38D;
+  --select-dark:     #2B2A27; /* Deep base color for dark elements */
+  --select-dark-hover: #4F4D48; /* Charcoal gray for hover state */
+  --highlight-bright:  #34D399; /* Vibrant bright highlight color */
+  --select-border:   #8A8574;
 
   /* Typography */
   --font-display: 'Bitter', Georgia, 'Times New Roman', serif;
@@ -78,7 +80,7 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--highlight-bright);
   outline-offset: 2px;
 }
 
@@ -98,7 +100,7 @@ button {
 }
 
 /* ==========================================================================
-   3. NEOMORPHIC UI COMPONENTS & BUTTONS (WITH HOVER HIGHLIGHTS)
+   3. NEOMORPHIC UI COMPONENTS & BUTTONS (WITH BRIGHT HIGHLIGHTS)
    ========================================================================== */
 .neo-raised {
   background: var(--paper-raised);
@@ -164,12 +166,12 @@ button {
   line-height: 1.2;
 }
 
-/* Hover Highlight for Dark Ink Buttons */
+/* Hover State for Dark Ink Buttons: Charcoal Gray + Bright Highlight */
 .ink-btn:hover {
-  background-color: var(--accent-deep);
-  border-color: #8C8673;
+  background-color: var(--select-dark-hover); /* Charcoal Gray */
+  border-color: var(--highlight-bright);      /* Brighter border highlight */
   color: #FFFFFF;
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.4), 3px 3px 8px rgba(0, 0, 0, 0.25);
 }
 
 .ink-btn:active {
@@ -179,15 +181,15 @@ button {
 /* "MY STUFF ✓" Highlighted / Active Button Toggle State */
 .my-stuff-btn.active {
   background-color: var(--accent-active) !important;
-  border-color: #2F9E66 !important;
+  border-color: var(--highlight-bright) !important;
   color: #FFFFFF !important;
   box-shadow: 2px 2px 6px rgba(37, 133, 90, 0.35);
 }
 
 .my-stuff-btn.active:hover {
   background-color: #2F9E66 !important;
-  border-color: #38B074 !important;
-  box-shadow: 3px 3px 9px rgba(37, 133, 90, 0.45);
+  border-color: var(--highlight-bright) !important;
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.5);
 }
 
 /* Custom Select Dropdowns Base */
@@ -214,19 +216,20 @@ select.ink-select {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
 }
 
-/* Hover Highlight for Dark Selects */
+/* Hover State for Dark Selects: Charcoal Gray + Bright Highlight */
 select.ink-select:hover {
-  background-color: var(--accent-deep);
-  border-color: #8C8673;
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.25);
+  background-color: var(--select-dark-hover); /* Charcoal Gray */
+  border-color: var(--highlight-bright);      /* Brighter border highlight */
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.4), 3px 3px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* Prevent Dropdowns from Remaining Depressed on Focus */
+/* Select Focus Outline */
 select.ink-select:focus,
 select.neo-select:focus,
 .category-dropdown-bar select:focus {
   outline: none;
-  box-shadow: 0 0 0 2px var(--accent-deep);
+  border-color: var(--highlight-bright);
+  box-shadow: 0 0 0 2px var(--highlight-bright);
 }
 
 select option:disabled {
