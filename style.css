@@ -14,6 +14,7 @@
   --rule-strong:     #A9A38D;
   --accent:          #465C3F;
   --accent-deep:     #303F2B;
+  --accent-active:   #25855A; /* Bright green highlight for My Stuff checked state */
   --select-dark:     #3B3A36;
   --select-border:   #A9A38D;
 
@@ -53,12 +54,10 @@ body {
   min-height: 100vh;
 }
 
-/* Prevents scrolling when burger menu is open */
 body.no-scroll {
   overflow: hidden;
 }
 
-/* Subtle paper texture overlay */
 body::before {
   content: "";
   position: fixed;
@@ -83,7 +82,6 @@ button {
   outline-offset: 2px;
 }
 
-/* Utility Links */
 .nav-link {
   text-decoration: none;
 }
@@ -100,7 +98,7 @@ button {
 }
 
 /* ==========================================================================
-   3. NEOMORPHIC UI COMPONENTS & BUTTONS
+   3. NEOMORPHIC UI COMPONENTS & BUTTONS (WITH HOVER HIGHLIGHTS)
    ========================================================================== */
 .neo-raised {
   background: var(--paper-raised);
@@ -133,7 +131,13 @@ button {
   white-space: nowrap;
   background: var(--paper-raised);
   box-shadow: 4px 4px 9px var(--paper-shadow-hi), -4px -4px 9px var(--paper-shadow-lo);
-  transition: box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition: box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+/* Hover State for Standard Neomorphic Buttons */
+.neo-btn:hover {
+  background: #FFFFFF;
+  box-shadow: 5px 5px 11px var(--paper-shadow-hi), -5px -5px 11px var(--paper-shadow-lo);
 }
 
 .neo-btn:active {
@@ -149,9 +153,8 @@ button {
   font-size: 0.76rem;
 }
 
-/* Dark Ink Button & Header Select Styling */
-.ink-btn,
-select.ink-select {
+/* Dark Ink Button Styling */
+.ink-btn {
   background-color: var(--select-dark);
   color: #FFFFFF;
   font-weight: 600;
@@ -161,24 +164,30 @@ select.ink-select {
   line-height: 1.2;
 }
 
-.ink-btn:hover,
-select.ink-select:hover {
+/* Hover Highlight for Dark Ink Buttons */
+.ink-btn:hover {
   background-color: var(--accent-deep);
+  border-color: #8C8673;
+  color: #FFFFFF;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.25);
 }
 
 .ink-btn:active {
   box-shadow: inset 3px 3px 7px rgba(0, 0, 0, 0.5), inset -3px -3px 7px rgba(255, 255, 255, 0.05);
 }
 
-/* "MY STUFF" Highlighted / Active Button Toggle State */
+/* "MY STUFF ✓" Highlighted / Active Button Toggle State */
 .my-stuff-btn.active {
-  background-color: var(--accent) !important;
-  border-color: var(--accent) !important;
+  background-color: var(--accent-active) !important;
+  border-color: #2F9E66 !important;
   color: #FFFFFF !important;
+  box-shadow: 2px 2px 6px rgba(37, 133, 90, 0.35);
 }
 
 .my-stuff-btn.active:hover {
-  background-color: var(--accent-deep) !important;
+  background-color: #2F9E66 !important;
+  border-color: #38B074 !important;
+  box-shadow: 3px 3px 9px rgba(37, 133, 90, 0.45);
 }
 
 /* Custom Select Dropdowns Base */
@@ -194,9 +203,32 @@ select.ink-select {
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='7'><path d='M0 0L5 7L10 0Z' fill='%23FFFFFF'/></svg>");
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* Styling for Disabled Dropdown Options */
+select.ink-select {
+  background-color: var(--select-dark);
+  color: #FFFFFF;
+  font-weight: 600;
+  border: 1px solid var(--select-border);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Hover Highlight for Dark Selects */
+select.ink-select:hover {
+  background-color: var(--accent-deep);
+  border-color: #8C8673;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Prevent Dropdowns from Remaining Depressed on Focus */
+select.ink-select:focus,
+select.neo-select:focus,
+.category-dropdown-bar select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-deep);
+}
+
 select option:disabled {
   color: var(--ink-faint) !important;
   background-color: #2D2C29 !important;
@@ -208,7 +240,6 @@ select option:disabled {
   display: block;
 }
 
-/* Hides disabled placeholder options inside expanded select dropdown lists */
 select option[hidden] {
   display: none !important;
 }
@@ -268,7 +299,6 @@ header#site-bar {
   white-space: nowrap;
 }
 
-/* Scrolled & Minimal Header States */
 header#site-bar.scrolled .bar-full,
 header#site-bar.minimal-bar .bar-full {
   display: none !important;
@@ -279,7 +309,7 @@ header#site-bar.minimal-bar .bar-compact {
   display: flex !important;
 }
 
-/* Burger Toggle Button */
+/* Burger Toggle Button with Hover */
 .burger {
   width: 42px;
   height: 42px;
@@ -293,6 +323,12 @@ header#site-bar.minimal-bar .bar-compact {
   background: var(--paper-raised);
   border-radius: var(--radius);
   box-shadow: 4px 4px 9px var(--paper-shadow-hi), -4px -4px 9px var(--paper-shadow-lo);
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.burger:hover {
+  background: #FFFFFF;
+  box-shadow: 5px 5px 11px var(--paper-shadow-hi), -5px -5px 11px var(--paper-shadow-lo);
 }
 
 .burger span {
@@ -411,7 +447,6 @@ h1.masthead {
   margin: 0.5rem 0;
 }
 
-/* Main Homepage Category Dropdowns */
 .category-dropdown-bar {
   display: flex;
   flex-wrap: wrap;
@@ -432,22 +467,19 @@ h1.masthead {
   line-height: 1.2;
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: var(--radius);
-  
   box-shadow: 4px 4px 8px var(--paper-shadow-hi), -4px -4px 8px #FFFFFF;
-  
   appearance: none;
   -webkit-appearance: none;
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='7'><path d='M0 0L5 7L10 0Z' fill='%23000000'/></svg>") !important;
-  
   padding: 0.45rem 2.1rem 0.45rem 0.65rem;
   width: auto;
   min-width: 110px;
   max-width: 145px;
   text-overflow: ellipsis;
   cursor: pointer;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .category-dropdown-bar select option {
@@ -455,16 +487,15 @@ h1.masthead {
   color: #000000;
 }
 
+/* Clear Hover Highlight for Home Category Selects */
 .category-dropdown-bar select:hover {
-  background-color: #D6D2C5 !important;
-  box-shadow: 2px 2px 5px var(--paper-shadow-hi), -2px -2px 5px #FFFFFF;
+  background-color: #ECE8DC !important;
+  box-shadow: 5px 5px 10px var(--paper-shadow-hi), -5px -5px 10px #FFFFFF;
+  border-color: #B5B09E;
 }
 
-.category-dropdown-bar select:active,
-.category-dropdown-bar select:focus {
-  background-color: #D2CEC1 !important;
+.category-dropdown-bar select:active {
   box-shadow: inset 2px 2px 5px var(--paper-shadow-hi), inset -2px -2px 5px #FFFFFF;
-  outline: none;
 }
 
 body.nav-collapsed .hero {
@@ -486,7 +517,6 @@ main {
   width: 100%;
 }
 
-/* Welcome Block */
 .welcome {
   max-width: 680px;
   margin: 0 auto 4.2rem;
@@ -504,7 +534,6 @@ main {
   margin-bottom: 0;
 }
 
-/* Testimonial Quote Block */
 .testimonial {
   max-width: 620px;
   margin: 0 auto 4.5rem;
@@ -540,7 +569,6 @@ main {
   display: block;
 }
 
-/* Featured Article Card */
 .article-card {
   max-width: 740px;
   margin: 0 auto;
@@ -585,7 +613,6 @@ main {
   opacity: 0.6;
 }
 
-/* Standalone / Blank Page Container */
 .blank-page {
   position: relative;
   z-index: 1;
@@ -648,7 +675,7 @@ main {
 }
 
 .facility-header:hover {
-  background: rgba(0, 0, 0, 0.02);
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .facility-name {
@@ -784,7 +811,6 @@ footer.site-footer {
   100% { opacity: 0; }
 }
 
-/* Accessibility: Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   * {
     transition-duration: 0.001ms !important;
