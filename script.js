@@ -205,8 +205,41 @@ function initStates() {
 }
 
 // ==========================================================================
-// 3. INTERACTIVE CONTROLS
+// 3. INTERACTIVE CONTROLS & "MY STUFF" TOGGLE
 // ==========================================================================
+
+/**
+ * Toggles the state of the "MY STUFF +" button on facility cards.
+ * Highlights the button and changes text to "MY STUFF ✓" when active.
+ */
+function toggleMyStuff(btn) {
+  const isAdded = btn.classList.toggle('active');
+  
+  if (isAdded) {
+    btn.innerHTML = 'MY STUFF &#10003;';
+  } else {
+    btn.innerHTML = 'MY STUFF +';
+  }
+
+  // Extensible function call for future implementations (e.g., localStorage, backend API)
+  onMyStuffToggle(btn, isAdded);
+}
+
+/**
+ * Hook function triggered when a card's "MY STUFF" state is toggled.
+ * Define custom logic here later (e.g. saving facility IDs to a list).
+ */
+function onMyStuffToggle(btnElement, isAdded) {
+  // Placeholder for future logic
+  const card = btnElement.closest('.facility-card');
+  const facilityName = card ? card.querySelector('.facility-name')?.textContent : null;
+
+  if (isAdded) {
+    console.log(`Added to My Stuff: ${facilityName}`);
+  } else {
+    console.log(`Removed from My Stuff: ${facilityName}`);
+  }
+}
 
 /**
  * Handles Opening/Closing of Mobile Burger Navigation Panel and prevents body scroll when active.
