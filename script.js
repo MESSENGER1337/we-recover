@@ -84,11 +84,9 @@ function handleCategoryChange(selectEl) {
   if (!selectEl || !selectEl.value) return;
   const targetUrl = selectEl.value;
 
-  // 1. Revert select control back to placeholder & remove focus
   selectEl.value = "";
   selectEl.blur();
 
-  // 2. Close mobile navigation menu if open
   const burgerPanel = document.getElementById('burgerPanel');
   const overlay = document.getElementById('overlay');
   const burgerBtn = document.getElementById('burgerBtn');
@@ -98,7 +96,6 @@ function handleCategoryChange(selectEl) {
   if (burgerBtn) burgerBtn.setAttribute('aria-expanded', 'false');
   document.body.classList.remove('no-scroll');
 
-  // 3. Navigate to destination
   window.location.href = targetUrl;
 }
 
@@ -160,7 +157,6 @@ function renderCategoryDropdowns() {
   const bpCategories = document.getElementById('bpCategories');
   const heroCategoryNav = document.getElementById('heroCategoryNav');
 
-  // Populate Burger Menu Categories (dark ink selects)
   if (bpCategories) {
     let html = `<p class="bp-label">CATEGORIES</p>`;
     CATEGORY_GROUPS.forEach(group => {
@@ -171,7 +167,6 @@ function renderCategoryDropdowns() {
     bpCategories.innerHTML = html;
   }
 
-  // Populate Hero Category Bar (light neomorphic selects)
   if (heroCategoryNav) {
     heroCategoryNav.innerHTML = CATEGORY_GROUPS
       .map(group => buildCategorySelectHTML(group, 'neo-select'))
@@ -180,8 +175,7 @@ function renderCategoryDropdowns() {
 }
 
 /**
- * Populates state selector dropdowns, setting Oklahoma as active/default 
- * and graying out all other states.
+ * Populates state selector dropdowns, setting Oklahoma as active/default.
  */
 function initStates() {
   const selects = [
@@ -204,13 +198,26 @@ function initStates() {
   });
 }
 
+/**
+ * Configures event listeners to reset select dropdown depression/focus states
+ * when clicked or toggled.
+ */
+function initSelectStateHandlers() {
+  document.addEventListener('mouseup', (e) => {
+    if (e.target.tagName === 'SELECT') {
+      setTimeout(() => {
+        e.target.blur();
+      }, 150);
+    }
+  });
+}
+
 // ==========================================================================
 // 3. INTERACTIVE CONTROLS & "MY STUFF" TOGGLE
 // ==========================================================================
 
 /**
  * Toggles the state of the "MY STUFF +" button on facility cards.
- * Highlights the button and changes text to "MY STUFF ✓" when active.
  */
 function toggleMyStuff(btn) {
   const isAdded = btn.classList.toggle('active');
@@ -221,16 +228,10 @@ function toggleMyStuff(btn) {
     btn.innerHTML = 'MY STUFF +';
   }
 
-  // Extensible function call for future implementations (e.g., localStorage, backend API)
   onMyStuffToggle(btn, isAdded);
 }
 
-/**
- * Hook function triggered when a card's "MY STUFF" state is toggled.
- * Define custom logic here later (e.g. saving facility IDs to a list).
- */
 function onMyStuffToggle(btnElement, isAdded) {
-  // Placeholder for future logic
   const card = btnElement.closest('.facility-card');
   const facilityName = card ? card.querySelector('.facility-name')?.textContent : null;
 
@@ -242,7 +243,7 @@ function onMyStuffToggle(btnElement, isAdded) {
 }
 
 /**
- * Handles Opening/Closing of Mobile Burger Navigation Panel and prevents body scroll when active.
+ * Handles Opening/Closing of Mobile Burger Navigation Panel.
  */
 function initBurgerPanel() {
   const burgerBtn = document.getElementById('burgerBtn');
@@ -291,7 +292,7 @@ function initHeaderScroll() {
 }
 
 // ==========================================================================
-// 4. INITIALIZATION & BACK-BUTTON (BFCACHE) RECOVERY
+// 4. INITIALIZATION & BACK-BUTTON RECOVERY
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -300,9 +301,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initStates();
   initBurgerPanel();
   initHeaderScroll();
+  initSelectStateHandlers();
 });
 
-// Runs every time the page is restored from browser cache via back/forward navigation
 window.addEventListener('pageshow', () => {
   resetAllCategoryDropdowns();
   
