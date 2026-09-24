@@ -398,10 +398,11 @@ h1.masthead {
   width: 100%;
 }
 
-.category-dropdown-bar select {
+.category-dropdown-bar select,
+.category-dropdown-bar select.neo-select {
   /* Slightly darker background tone (#DFDBD0) relative to page background (#ECE9DF) */
-  background-color: #DFDBD0;
-  color: #000000;
+  background-color: #DFDBD0 !important;
+  color: #000000 !important;
   font-family: var(--font-ui);
   font-weight: 600;
   font-size: 0.82rem;
@@ -416,7 +417,7 @@ h1.masthead {
   -webkit-appearance: none;
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='7'><path d='M0 0L5 7L10 0Z' fill='%23000000'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='7'><path d='M0 0L5 7L10 0Z' fill='%23000000'/></svg>") !important;
   
   padding: 0.45rem 2.1rem 0.45rem 0.65rem;
   width: auto;
@@ -427,14 +428,19 @@ h1.masthead {
   transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
+.category-dropdown-bar select option {
+  background-color: #DFDBD0;
+  color: #000000;
+}
+
 .category-dropdown-bar select:hover {
-  background-color: #D6D2C5;
+  background-color: #D6D2C5 !important;
   box-shadow: 2px 2px 5px var(--paper-shadow-hi), -2px -2px 5px #FFFFFF;
 }
 
 .category-dropdown-bar select:active,
 .category-dropdown-bar select:focus {
-  background-color: #D2CEC1;
+  background-color: #D2CEC1 !important;
   box-shadow: inset 2px 2px 5px var(--paper-shadow-hi), inset -2px -2px 5px #FFFFFF;
   outline: none;
 }
