@@ -1,120 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>We Recover</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700;900&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<style>
-.category-dropdown-bar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-}
-.category-dropdown-bar select {
-  min-width: 140px;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>We Recover</title>
+
+  <!-- Typography & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="eink-flash" id="einkFlash"></div>
+  <!-- Visual Effects -->
+  <div class="eink-flash" id="einkFlash"></div>
 
-<header id="site-bar">
-  <div class="bar-inner">
+  <!-- ==========================================
+       HEADER & NAVIGATION BAR
+       ========================================== -->
+  <header id="site-bar">
+    <div class="bar-inner">
 
-    <!-- Unscrolled top bar -->
-    <div class="bar-full" id="barFull">
-      <select class="ink-select" id="stateSelect" aria-label="Select your state"></select>
-      <a href="mystuff.html" class="neo-btn ink-btn" style="text-decoration:none;">My Stuff</a>
-      <a href="login.html" class="neo-btn ink-btn" style="text-decoration:none;">Login</a>
-      <a href="settings.html" class="neo-btn ink-btn icon-btn" aria-label="Settings">
-        <svg class="icon-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 13a7.97 7.97 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a8.1 8.1 0 0 0-1.7-1L14.9 3h-4l-.4 2.9a8.1 8.1 0 0 0-1.7 1l-2.5-1-2 3.5L6.4 11a7.97 7.97 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a8.1 8.1 0 0 0 1.7 1l.4 2.9h4l.4-2.9a8.1 8.1 0 0 0 1.7-1l2.5 1 2-3.5-2.1-1.6Z"/>
-        </svg>
-      </a>
+      <!-- Unscrolled Bar View (Desktop/Default) -->
+      <div class="bar-full" id="barFull">
+        <select class="ink-select" id="stateSelect" aria-label="Select your state"></select>
+        <a href="mystuff.html" class="neo-btn ink-btn nav-link">My Stuff</a>
+        <a href="login.html" class="neo-btn ink-btn nav-link">Login</a>
+        <a href="settings.html" class="neo-btn ink-btn icon-btn" aria-label="Settings">
+          <svg class="icon-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 13a7.97 7.97 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a8.1 8.1 0 0 0-1.7-1L14.9 3h-4l-.4 2.9a8.1 8.1 0 0 0-1.7 1l-2.5-1-2 3.5L6.4 11a7.97 7.97 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a8.1 8.1 0 0 0 1.7 1l.4 2.9h4l.4-2.9a8.1 8.1 0 0 0 1.7-1l2.5 1 2-3.5-2.1-1.6Z"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Scrolled / Mobile Compact View -->
+      <div class="bar-compact" id="barCompact">
+        <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <a href="index.html" class="compact-title nav-link">WE RECOVER</a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Spacer to offset fixed header -->
+  <div id="bar-spacer"></div>
+
+  <!-- ==========================================
+       BURGER PANEL / MOBILE SIDEBAR
+       ========================================== -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="burger-panel" id="burgerPanel" aria-label="Site menu">
+    <p class="bp-title"><a href="index.html" class="nav-link-inherit">WE RECOVER</a></p>
+
+    <div class="bp-section">
+      <p class="bp-label">LOCATION</p>
+      <div class="bp-select-row">
+        <select class="ink-select" id="stateSelectMobile" aria-label="Select your state"></select>
+      </div>
     </div>
 
-    <!-- Scrolled top bar: burger menu + compact title -->
-    <div class="bar-compact" id="barCompact">
-      <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <a href="index.html" class="compact-title" style="text-decoration:none;">WE RECOVER</a>
+    <!-- Account navigation populated by script.js -->
+    <div class="bp-section" id="bpAccountNav"></div>
+
+    <!-- Dropdown categories populated by script.js -->
+    <div class="bp-section" id="bpCategories"></div>
+  </aside>
+
+  <!-- ==========================================
+       HERO SECTION
+       ========================================== -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <h1 class="masthead">WE RECOVER</h1>
+      <!-- Populated dynamically via script.js -->
+      <nav class="category-dropdown-bar" id="heroCategoryNav" aria-label="Categories"></nav>
     </div>
+  </section>
 
-  </div>
-</header>
+  <!-- ==========================================
+       MAIN CONTENT
+       ========================================== -->
+  <main id="mainContent">
 
-<div id="bar-spacer"></div>
+    <!-- Mission Statement -->
+    <section class="welcome">
+      <p>We Recover is a plain-spoken guide built to help you navigate the essential, practical details of rebuilding a life &mdash; from securing healthcare and finding stable housing to restarting employment and managing complex state documentation.</p>
+      <p>Instead of overwhelming you with bureaucracy or buried government forms, we organize resources by what you need to take action on this week. Clear checklists, verified contacts, and step-by-step guides mean you always know where to step next.</p>
+    </section>
 
-<div class="overlay" id="overlay"></div>
-<aside class="burger-panel" id="burgerPanel" aria-label="Site menu">
-  <p class="bp-title"><a href="index.html" style="text-decoration:none; color:inherit;">WE RECOVER</a></p>
+    <!-- Testimonial Quote -->
+    <section class="testimonial neo-pressed">
+      <p>&ldquo;When you leave a facility, everyone gives you folders full of phone numbers, but half of them lead to automated menus or wrong departments. I didn&rsquo;t need another hotline. I needed one clear page that told me exactly where to go on a Tuesday morning. This site gave me that clarity.&rdquo;</p>
+      <cite>&mdash; Jamie R., Tulsa, Oklahoma</cite>
+    </section>
 
-  <div class="bp-section">
-    <p class="bp-label">LOCATION</p>
-    <div class="bp-select-row">
-      <select class="ink-select" id="stateSelectMobile" aria-label="Select your state"></select>
+    <!-- Featured Article Card -->
+    <article class="article-card neo-raised">
+      <p class="article-eyebrow">Featured Story</p>
+      <h2>The Quiet Work of Rebuilding a Life, One Appointment at a Time</h2>
+      <p class="excerpt">A comprehensive look at how peer recovery specialists and community health navigators across Oklahoma are stitching together housing assistance, Medicaid enrollment, and transportation networks for individuals in early recovery.</p>
+      <p class="excerpt">In this in-depth report, we examine why eliminating administrative friction in the first 30 days post-treatment dramatically reduces relapse rates &mdash; and why the most critical support is rarely the paperwork itself, but having an actionable roadmap that respects your time.</p>
+      <p class="article-meta">
+        <span>By Andrea Colton</span>
+        <span class="dot">&middot;</span>
+        <span>The Oklahoman</span>
+      </p>
+    </article>
+
+  </main>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-links" aria-label="Footer Navigation">
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="get-involved.html">Get Involved</a>
+      </nav>
+      <p class="footer-credit">Est. 2026 Messenger Media</p>
     </div>
-  </div>
+  </footer>
 
-  <div class="bp-section" id="bpAccountNav"></div>
-  <div class="bp-section" id="bpCategories"></div>
-</aside>
-
-<section class="hero" id="hero">
-  <div class="hero-inner">
-    <h1 class="masthead">WE RECOVER</h1>
-
-    <!-- Homepage Dropdown Category Bar populated dynamically -->
-    <nav class="category-dropdown-bar" id="heroCategoryNav" aria-label="Categories"></nav>
-  </div>
-</section>
-
-<main id="mainContent">
-
-  <section class="welcome">
-    <p>We Recover is a plain-spoken guide built to help you navigate the essential, practical details of rebuilding a life &mdash; from securing healthcare and finding stable housing to restarting employment and managing complex state documentation.</p>
-    <p>Instead of overwhelming you with bureaucracy or buried government forms, we organize resources by what you need to take action on this week. Clear checklists, verified contacts, and step-by-step guides mean you always know where to step next.</p>
-  </section>
-
-  <section class="testimonial neo-pressed">
-    <p>&ldquo;When you leave a facility, everyone gives you folders full of phone numbers, but half of them lead to automated menus or wrong departments. I didn&rsquo;t need another hotline. I needed one clear page that told me exactly where to go on a Tuesday morning. This site gave me that clarity.&rdquo;</p>
-    <cite>&mdash; Jamie R., Tulsa, Oklahoma</cite>
-  </section>
-
-  <section class="article-card neo-raised">
-    <p class="article-eyebrow">Featured Story</p>
-    <h2>The Quiet Work of Rebuilding a Life, One Appointment at a Time</h2>
-    <p class="excerpt">A comprehensive look at how peer recovery specialists and community health navigators across Oklahoma are stitching together housing assistance, Medicaid enrollment, and transportation networks for individuals in early recovery.</p>
-    <p class="excerpt">In this in-depth report, we examine why eliminating administrative friction in the first 30 days post-treatment dramatically reduces relapse rates &mdash; and why the most critical support is rarely the paperwork itself, but having an actionable roadmap that respects your time.</p>
-    <p class="article-meta">
-      <span>By Andrea Colton</span>
-      <span class="dot">&middot;</span>
-      <span>The Oklahoman</span>
-    </p>
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <nav class="footer-links" aria-label="Footer Navigation">
-      <a href="faq.html">FAQ</a>
-      <a href="contact.html">Contact Us</a>
-      <a href="get-involved.html">Get Involved</a>
-    </nav>
-    <p class="footer-credit">Est. 2026 Messenger Media</p>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
+
+<!-- testing -->
