@@ -19,14 +19,14 @@
     <!-- Unscrolled top bar -->
     <div class="bar-full" id="barFull">
       <select class="ink-select" id="stateSelect" aria-label="Select your state"></select>
-      <button class="neo-btn ink-btn" data-page="My Stuff">My Stuff</button>
-      <button class="neo-btn ink-btn" data-page="Login">Login</button>
-      <button class="neo-btn ink-btn icon-btn" data-page="Settings" aria-label="Settings">
+      <a href="mystuff.html" class="neo-btn ink-btn" style="text-decoration:none;">My Stuff</a>
+      <a href="login.html" class="neo-btn ink-btn" style="text-decoration:none;">Login</a>
+      <a href="settings.html" class="neo-btn ink-btn icon-btn" aria-label="Settings">
         <svg class="icon-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <circle cx="12" cy="12" r="3"/>
           <path d="M19.4 13a7.97 7.97 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a8.1 8.1 0 0 0-1.7-1L14.9 3h-4l-.4 2.9a8.1 8.1 0 0 0-1.7 1l-2.5-1-2 3.5L6.4 11a7.97 7.97 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a8.1 8.1 0 0 0 1.7 1l.4 2.9h4l.4-2.9a8.1 8.1 0 0 0 1.7-1l2.5 1 2-3.5-2.1-1.6Z"/>
         </svg>
-      </button>
+      </a>
     </div>
 
     <!-- Scrolled top bar: burger menu + compact title -->
@@ -34,7 +34,7 @@
       <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <div class="compact-title">WE RECOVER</div>
+      <a href="index.html" class="compact-title" style="text-decoration:none;">WE RECOVER</a>
     </div>
 
   </div>
@@ -44,7 +44,7 @@
 
 <div class="overlay" id="overlay"></div>
 <aside class="burger-panel" id="burgerPanel" aria-label="Site menu">
-  <p class="bp-title">WE RECOVER</p>
+  <p class="bp-title"><a href="index.html" style="text-decoration:none; color:inherit;">WE RECOVER</a></p>
 
   <div class="bp-section">
     <p class="bp-label">LOCATION</p>
@@ -55,15 +55,15 @@
 
   <div class="bp-section">
     <p class="bp-label">ACCOUNT & NAVIGATION</p>
-    <button class="neo-btn ink-btn bp-btn" data-page="My Stuff">My Stuff <span>&rarr;</span></button>
-    <button class="neo-btn ink-btn bp-btn" data-page="Login">Login <span>&rarr;</span></button>
-    <button class="neo-btn ink-btn bp-btn" data-page="Settings">
+    <a href="mystuff.html" class="neo-btn ink-btn bp-btn" style="text-decoration:none;">My Stuff <span>&rarr;</span></a>
+    <a href="login.html" class="neo-btn ink-btn bp-btn" style="text-decoration:none;">Login <span>&rarr;</span></a>
+    <a href="settings.html" class="neo-btn ink-btn bp-btn" style="text-decoration:none; display:flex; align-items:center;">
       <span>Settings</span>
       <svg class="icon-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
         <circle cx="12" cy="12" r="3"/>
         <path d="M19.4 13a7.97 7.97 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a8.1 8.1 0 0 0-1.7-1L14.9 3h-4l-.4 2.9a8.1 8.1 0 0 0-1.7 1l-2.5-1-2 3.5L6.4 11a7.97 7.97 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a8.1 8.1 0 0 0 1.7 1l.4 2.9h4l.4-2.9a8.1 8.1 0 0 0 1.7-1l2.5 1 2-3.5-2.1-1.6Z"/>
       </svg>
-    </button>
+    </a>
   </div>
 
   <div class="bp-section" id="bpCategories">
@@ -107,9 +107,9 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <nav class="footer-links" aria-label="Footer Navigation">
-      <a href="#" data-page="FAQ">FAQ</a>
-      <a href="#" data-page="Contact Us">Contact Us</a>
-      <a href="#" data-page="Get Involved">Get Involved</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="get-involved.html">Get Involved</a>
     </nav>
     <p class="footer-credit">Est. 2026 Messenger Media</p>
   </div>
