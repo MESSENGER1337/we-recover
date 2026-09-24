@@ -7,14 +7,7 @@
 // ==========================================================================
 
 const STATES = [
-  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
-  "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", 
-  "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", 
-  "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", 
-  "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", 
-  "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", 
-  "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", 
-  "Wisconsin", "Wyoming"
+  "Oklahoma"
 ];
 
 const CATEGORY_GROUPS = [
@@ -64,18 +57,6 @@ const CATEGORY_GROUPS = [
 // ==========================================================================
 // 2. RENDERING & EVENT HELPERS
 // ==========================================================================
-
-/**
- * Redirects user to index.html unless they are already on the homepage.
- */
-function navigateToHomepage() {
-  const currentPath = window.location.pathname;
-  const isHomepage = currentPath.endsWith('index.html') || currentPath.endsWith('/') || currentPath === '';
-  
-  if (!isHomepage) {
-    window.location.href = 'index.html';
-  }
-}
 
 /**
  * Resets all category dropdowns to default placeholder state & blurs focus.
@@ -192,8 +173,7 @@ function renderCategoryDropdowns() {
 }
 
 /**
- * Populates state selector dropdowns, sets Oklahoma as active/default,
- * disables all other states, and handles navigation to the homepage.
+ * Populates state selector dropdowns and synchronizes their selections.
  */
 function initStates() {
   const selects = [
@@ -202,17 +182,14 @@ function initStates() {
   ].filter(Boolean);
 
   selects.forEach(select => {
-    select.innerHTML = STATES.map(st => {
-      const isOklahoma = st === 'Oklahoma';
-      return `<option value="${st}" ${isOklahoma ? 'selected' : 'disabled'}>${st}</option>`;
-    }).join('');
+    select.innerHTML = STATES.map(st => 
+      `<option value="${st}" selected>${st}</option>`
+    ).join('');
 
-    const handleStateInteraction = () => {
-      navigateToHomepage();
-    };
-
-    select.addEventListener('change', handleStateInteraction);
-    select.addEventListener('click', handleStateInteraction);
+    select.addEventListener('change', (e) => {
+      const val = e.target.value;
+      selects.forEach(s => s.value = val);
+    });
   });
 }
 
