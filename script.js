@@ -66,21 +66,29 @@ const CATEGORY_GROUPS = [
 // ==========================================================================
 
 /**
+ * Resets all category dropdowns to default placeholder state & blurs focus.
+ */
+function resetAllCategoryDropdowns() {
+  const selects = document.querySelectorAll('.category-dropdown-bar select, .bp-select-row-item select');
+  selects.forEach(select => {
+    select.value = "";
+    select.blur();
+  });
+}
+
+/**
  * Handles dropdown category navigation:
- * Resets the dropdown back to placeholder text, blurs focus to restore
- * the unpressed appearance, closes the burger panel, and navigates.
+ * Resets selection, blurs element, closes mobile menu, and navigates.
  */
 function handleCategoryChange(selectEl) {
   if (!selectEl || !selectEl.value) return;
   const targetUrl = selectEl.value;
 
-  // 1. Revert select control back to placeholder
+  // 1. Revert select control back to placeholder & remove focus
   selectEl.value = "";
-
-  // 2. Remove browser focus to restore the unpressed/raised CSS appearance
   selectEl.blur();
 
-  // 3. Close mobile navigation menu if open
+  // 2. Close mobile navigation menu if open
   const burgerPanel = document.getElementById('burgerPanel');
   const overlay = document.getElementById('overlay');
   const burgerBtn = document.getElementById('burgerBtn');
@@ -90,7 +98,7 @@ function handleCategoryChange(selectEl) {
   if (burgerBtn) burgerBtn.setAttribute('aria-expanded', 'false');
   document.body.classList.remove('no-scroll');
 
-  // 4. Navigate to destination
+  // 3. Navigate to destination
   window.location.href = targetUrl;
 }
 
@@ -246,7 +254,7 @@ function initHeaderScroll() {
 }
 
 // ==========================================================================
-// 4. INITIALIZATION
+// 4. INITIALIZATION & BACK-BUTTON (BFCACHE) RECOVERY
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -255,4 +263,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initStates();
   initBurgerPanel();
   initHeaderScroll();
+});
+
+// Runs every time the page is restored from browser cache via back/forward navigation
+window.addEventListener('pageshow', () => {
+  resetAllCategoryDropdowns();
+  
+  // Ensure document activeElement drops focus
+  if (document.activeElement && document.activeElement.tagName === 'SELECT') {
+    document.activeElement.blur();
+  }
 });
