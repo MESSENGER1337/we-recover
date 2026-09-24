@@ -7,7 +7,14 @@
 // ==========================================================================
 
 const STATES = [
-  "Oklahoma"
+  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
+  "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", 
+  "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", 
+  "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", 
+  "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", 
+  "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", 
+  "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", 
+  "Wisconsin", "Wyoming"
 ];
 
 const CATEGORY_GROUPS = [
@@ -173,7 +180,8 @@ function renderCategoryDropdowns() {
 }
 
 /**
- * Populates state selector dropdowns and synchronizes their selections.
+ * Populates state selector dropdowns, setting Oklahoma as active/default 
+ * and graying out all other states.
  */
 function initStates() {
   const selects = [
@@ -182,9 +190,12 @@ function initStates() {
   ].filter(Boolean);
 
   selects.forEach(select => {
-    select.innerHTML = STATES.map(st => 
-      `<option value="${st}" selected>${st}</option>`
-    ).join('');
+    select.innerHTML = STATES.map(st => {
+      const isOklahoma = st === 'Oklahoma';
+      return `<option value="${st}" ${isOklahoma ? 'selected' : 'disabled'}>${st}</option>`;
+    }).join('');
+
+    select.value = 'Oklahoma';
 
     select.addEventListener('change', (e) => {
       const val = e.target.value;
