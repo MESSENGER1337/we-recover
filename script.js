@@ -10,23 +10,57 @@ const STATES = [
   "Wisconsin", "Wyoming"
 ];
 
-// Global Categories List
-const CATEGORIES = [
-  "Treatment Directory",
-  "Healthcare & Medicaid",
-  "Housing Assistance",
-  "Employment & Jobs",
-  "ID & Legal Documents",
-  "Support Groups"
+// Global Category Dropdown Data
+const CATEGORY_GROUPS = [
+  {
+    title: "HEALTH",
+    items: [
+      { label: "Medicaid & Insurance Navigation", url: "blank.html" },
+      { label: "Community Health Clinics", url: "blank.html" },
+      { label: "Mental Health & Counseling", url: "blank.html" }
+    ]
+  },
+  {
+    title: "BASICS",
+    items: [
+      { label: "Emergency Housing & Shelter", url: "blank.html" },
+      { label: "Food Assistance & Pantries", url: "blank.html" },
+      { label: "Transportation Vouchers", url: "blank.html" }
+    ]
+  },
+  {
+    title: "RECOVER",
+    items: [
+      { label: "Treatment Directory (Detox, Rehab, Sober Living)", url: "treatment.html" },
+      { label: "Support Groups & 12-Step Meetings", url: "blank.html" },
+      { label: "Peer Recovery Support Specialist Nav", url: "blank.html" },
+      { label: "Harm Reduction & Naloxone Access", url: "blank.html" }
+    ]
+  },
+  {
+    title: "LEGAL",
+    items: [
+      { label: "State ID & Birth Certificate Recovery", url: "blank.html" },
+      { label: "Record Expungement Services", url: "blank.html" },
+      { label: "Legal Aid & Court Advocacy", url: "blank.html" }
+    ]
+  },
+  {
+    title: "THRIVE",
+    items: [
+      { label: "Fair-Chance Employment & Job Training", url: "blank.html" },
+      { label: "Financial Literacy & Bank Accounts", url: "blank.html" },
+      { label: "Vocational & Continuing Education", url: "blank.html" }
+    ]
+  }
 ];
 
-// 1. Dynamic Burger Navigation Rendering
+// 1. Render Account & Navigation Links in Burger Menu
 function renderBurgerNav() {
   const accountNavContainer = document.getElementById('bpAccountNav');
   if (!accountNavContainer) return;
 
   const navItems = [
-    { label: 'Treatment Directory', url: 'treatment.html', isIcon: false },
     { label: 'My Stuff', url: 'mystuff.html', isIcon: false },
     { label: 'Login', url: 'login.html', isIcon: false },
     { label: 'Settings', url: 'settings.html', isIcon: true }
@@ -55,31 +89,45 @@ function renderBurgerNav() {
   accountNavContainer.innerHTML = html;
 }
 
-// 2. Dynamic Categories Bar & Drawer Rendering
-function renderCategories() {
-  const categoryBar = document.getElementById('categoryBar');
-  const bpCategories = document.getElementById('bpCategories');
+// 2. Helper to Build Dropdown <select> HTML
+function buildCategorySelectHTML(group) {
+  let options = `<option value="" selected disabled>${group.title} &#9660;</option>`;
+  group.items.forEach(item => {
+    options += `<option value="${item.url}">${item.label}</option>`;
+  });
 
-  if (categoryBar) {
-    categoryBar.innerHTML = CATEGORIES.map(cat => {
-      const isTreatment = cat.toLowerCase().includes('treatment');
-      const href = isTreatment ? 'treatment.html' : 'blank.html';
-      return `<a href="${href}" class="cat-btn">${cat}</a>`;
-    }).join('');
+  return `<select class="ink-select" onchange="if(this.value) window.location.href=this.value" aria-label="${group.title} Category">
+    ${options}
+  </select>`;
+}
+
+// 3. Render Dropdown Category Selectors Globally
+function renderCategoryDropdowns() {
+  const bpCategories = document.getElementById('bpCategories');
+  const heroCategoryNav = document.getElementById('heroCategoryNav');
+
+  // Populate Burger Menu Categories
+  if (bpCategories) {
+    let html = `<p class="bp-label">CATEGORIES</p>`;
+    CATEGORY_GROUPS.forEach(group => {
+      html += `<div class="bp-select-row" style="margin-bottom: 0.6rem;">
+        ${buildCategorySelectHTML(group)}
+      </div>`;
+    });
+    bpCategories.innerHTML = html;
   }
 
-  if (bpCategories) {
-    let catHtml = `<p class="bp-label">CATEGORIES</p>`;
-    CATEGORIES.forEach(cat => {
-      const isTreatment = cat.toLowerCase().includes('treatment');
-      const href = isTreatment ? 'treatment.html' : 'blank.html';
-      catHtml += `<a href="${href}" class="neo-btn ink-btn bp-btn" style="text-decoration:none;">${cat} <span>&rarr;</span></a>`;
+  // Populate Homepage Hero Category Dropdowns
+  if (heroCategoryNav) {
+    let html = '';
+    CATEGORY_GROUPS.forEach(group => {
+      html += buildCategorySelectHTML(group);
     });
-    bpCategories.innerHTML = catHtml;
+    heroCategoryNav.innerHTML = html;
   }
 }
 
-// 3. Populate State Selectors and Keep Synced
+// 4. Populate State Selectors
 function initStates() {
   const selects = [
     document.getElementById('stateSelect'),
@@ -98,7 +146,7 @@ function initStates() {
   });
 }
 
-// 4. Burger Panel Open / Close Logic
+// 5. Burger Panel Open / Close Logic
 function initBurgerPanel() {
   const burgerBtn = document.getElementById('burgerBtn');
   const burgerPanel = document.getElementById('burgerPanel');
@@ -127,7 +175,7 @@ function initBurgerPanel() {
   overlay.addEventListener('click', closeMenu);
 }
 
-// 5. Header Bar Viewport Scroll Behavior
+// 6. Header Bar Viewport Scroll Behavior
 function initHeaderScroll() {
   const barFull = document.getElementById('barFull');
   const barCompact = document.getElementById('barCompact');
@@ -148,7 +196,7 @@ function initHeaderScroll() {
 // Execute logic when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   renderBurgerNav();
-  renderCategories();
+  renderCategoryDropdowns();
   initStates();
   initBurgerPanel();
   initHeaderScroll();

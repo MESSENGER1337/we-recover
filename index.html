@@ -8,6 +8,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700;900&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+.category-dropdown-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.category-dropdown-bar select {
+  min-width: 140px;
+}
+</style>
 </head>
 <body>
 
@@ -19,7 +31,6 @@
     <!-- Unscrolled top bar -->
     <div class="bar-full" id="barFull">
       <select class="ink-select" id="stateSelect" aria-label="Select your state"></select>
-      <a href="treatment.html" class="neo-btn ink-btn" style="text-decoration:none;">Treatment Directory</a>
       <a href="mystuff.html" class="neo-btn ink-btn" style="text-decoration:none;">My Stuff</a>
       <a href="login.html" class="neo-btn ink-btn" style="text-decoration:none;">Login</a>
       <a href="settings.html" class="neo-btn ink-btn icon-btn" aria-label="Settings">
@@ -54,17 +65,16 @@
     </div>
   </div>
 
-  <!-- Dynamic Container for Account & Navigation -->
   <div class="bp-section" id="bpAccountNav"></div>
-
-  <!-- Dynamic Container for Categories -->
   <div class="bp-section" id="bpCategories"></div>
 </aside>
 
 <section class="hero" id="hero">
   <div class="hero-inner">
     <h1 class="masthead">WE RECOVER</h1>
-    <nav class="category-bar" id="categoryBar" aria-label="Categories"></nav>
+
+    <!-- Homepage Dropdown Category Bar populated dynamically -->
+    <nav class="category-dropdown-bar" id="heroCategoryNav" aria-label="Categories"></nav>
   </div>
 </section>
 
@@ -84,7 +94,7 @@
     <p class="article-eyebrow">Featured Story</p>
     <h2>The Quiet Work of Rebuilding a Life, One Appointment at a Time</h2>
     <p class="excerpt">A comprehensive look at how peer recovery specialists and community health navigators across Oklahoma are stitching together housing assistance, Medicaid enrollment, and transportation networks for individuals in early recovery.</p>
-    <p class="excerpt">In this in-depth report, we examine why eliminating administrative friction in the first 30 days post-treatment dramatic reduces relapse rates &mdash; and why the most critical support is rarely the paperwork itself, but having an actionable roadmap that respects your time.</p>
+    <p class="excerpt">In this in-depth report, we examine why eliminating administrative friction in the first 30 days post-treatment dramatically reduces relapse rates &mdash; and why the most critical support is rarely the paperwork itself, but having an actionable roadmap that respects your time.</p>
     <p class="article-meta">
       <span>By Andrea Colton</span>
       <span class="dot">&middot;</span>
