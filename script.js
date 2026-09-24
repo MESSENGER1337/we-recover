@@ -168,7 +168,7 @@ function initStates() {
 // ==========================================================================
 
 /**
- * Handles Opening/Closing of Mobile Burger Navigation Panel.
+ * Handles Opening/Closing of Mobile Burger Navigation Panel and prevents body scroll when active.
  */
 function initBurgerPanel() {
   const burgerBtn = document.getElementById('burgerBtn');
@@ -181,12 +181,14 @@ function initBurgerPanel() {
     burgerPanel.classList.add('open');
     overlay.classList.add('open');
     burgerBtn.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('no-scroll');
   }
 
   function closeMenu() {
     burgerPanel.classList.remove('open');
     overlay.classList.remove('open');
     burgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('no-scroll');
   }
 
   burgerBtn.addEventListener('click', () => {
