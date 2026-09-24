@@ -67,8 +67,8 @@ const CATEGORY_GROUPS = [
 
 /**
  * Handles dropdown category navigation:
- * Resets the dropdown back to placeholder text, closes the burger panel,
- * and then navigates to the target page.
+ * Resets the dropdown back to placeholder text, blurs focus to restore
+ * the unpressed appearance, closes the burger panel, and navigates.
  */
 function handleCategoryChange(selectEl) {
   if (!selectEl || !selectEl.value) return;
@@ -77,7 +77,10 @@ function handleCategoryChange(selectEl) {
   // 1. Revert select control back to placeholder
   selectEl.value = "";
 
-  // 2. Close mobile navigation menu if open
+  // 2. Remove browser focus to restore the unpressed/raised CSS appearance
+  selectEl.blur();
+
+  // 3. Close mobile navigation menu if open
   const burgerPanel = document.getElementById('burgerPanel');
   const overlay = document.getElementById('overlay');
   const burgerBtn = document.getElementById('burgerBtn');
@@ -87,7 +90,7 @@ function handleCategoryChange(selectEl) {
   if (burgerBtn) burgerBtn.setAttribute('aria-expanded', 'false');
   document.body.classList.remove('no-scroll');
 
-  // 3. Navigate to destination
+  // 4. Navigate to destination
   window.location.href = targetUrl;
 }
 
