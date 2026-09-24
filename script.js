@@ -75,7 +75,7 @@ function buildCategorySelectHTML(group) {
 
   return `
     <select class="ink-select" onchange="if(this.value) window.location.href=this.value" aria-label="${group.title} Category">
-      <option value="" selected disabled>${group.title} &#9660;</option>
+      <option value="" selected disabled>${group.title}</option>
       ${options}
     </select>`;
 }
@@ -225,5 +225,3 @@ document.addEventListener('DOMContentLoaded', () => {
   initBurgerPanel();
   initHeaderScroll();
 });
-
-// testing
