@@ -62,8 +62,34 @@ const CATEGORY_GROUPS = [
 ];
 
 // ==========================================================================
-// 2. RENDERING HELPERS
+// 2. RENDERING & EVENT HELPERS
 // ==========================================================================
+
+/**
+ * Handles dropdown category navigation:
+ * Resets the dropdown back to placeholder text, closes the burger panel,
+ * and then navigates to the target page.
+ */
+function handleCategoryChange(selectEl) {
+  if (!selectEl || !selectEl.value) return;
+  const targetUrl = selectEl.value;
+
+  // 1. Revert select control back to placeholder
+  selectEl.value = "";
+
+  // 2. Close mobile navigation menu if open
+  const burgerPanel = document.getElementById('burgerPanel');
+  const overlay = document.getElementById('overlay');
+  const burgerBtn = document.getElementById('burgerBtn');
+
+  if (burgerPanel) burgerPanel.classList.remove('open');
+  if (overlay) overlay.classList.remove('open');
+  if (burgerBtn) burgerBtn.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('no-scroll');
+
+  // 3. Navigate to destination
+  window.location.href = targetUrl;
+}
 
 /**
  * Builds HTML for category dropdown `<select>` elements.
@@ -74,7 +100,7 @@ function buildCategorySelectHTML(group, selectClass = "ink-select") {
     .join('');
 
   return `
-    <select class="${selectClass}" onchange="if(this.value) window.location.href=this.value" aria-label="${group.title} Category">
+    <select class="${selectClass}" onchange="handleCategoryChange(this)" aria-label="${group.title} Category">
       <option value="" selected disabled>${group.title}</option>
       ${options}
     </select>`;
