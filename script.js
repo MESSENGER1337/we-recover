@@ -198,20 +198,6 @@ function initStates() {
   });
 }
 
-/**
- * Configures event listeners to reset select dropdown depression/focus states
- * when clicked or toggled.
- */
-function initSelectStateHandlers() {
-  document.addEventListener('mouseup', (e) => {
-    if (e.target.tagName === 'SELECT') {
-      setTimeout(() => {
-        e.target.blur();
-      }, 150);
-    }
-  });
-}
-
 // ==========================================================================
 // 3. INTERACTIVE CONTROLS & "MY STUFF" TOGGLE
 // ==========================================================================
@@ -301,7 +287,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initStates();
   initBurgerPanel();
   initHeaderScroll();
-  initSelectStateHandlers();
 });
 
 window.addEventListener('pageshow', () => {
