@@ -53,6 +53,7 @@ body {
   min-height: 100vh;
 }
 
+/* Prevents scrolling when burger menu is open */
 body.no-scroll {
   overflow: hidden;
 }
@@ -147,7 +148,7 @@ button {
   font-size: 0.76rem;
 }
 
-/* Dark Ink Button & Select Styling */
+/* Dark Ink Button & Header Select Styling */
 .ink-btn,
 select.ink-select {
   background-color: var(--select-dark);
@@ -167,7 +168,7 @@ select.ink-select:hover {
   box-shadow: inset 3px 3px 7px rgba(0, 0, 0, 0.5), inset -3px -3px 7px rgba(255, 255, 255, 0.05);
 }
 
-/* Custom Select Dropdowns */
+/* Custom Select Dropdowns Base */
 select.neo-select,
 select.ink-select {
   font-family: var(--font-ui);
@@ -364,7 +365,7 @@ header#site-bar.minimal-bar .bar-compact {
 }
 
 /* ==========================================================================
-   6. HERO SECTION & CATEGORY BAR
+   6. HERO SECTION & CATEGORY DROPDOWNS
    ========================================================================== */
 .hero {
   text-align: center;
@@ -386,7 +387,7 @@ h1.masthead {
   margin: 0.5rem 0;
 }
 
-/* Hero Category Dropdowns Bar - Lighter Background Matching Paper Theme */
+/* Main Homepage Category Dropdowns */
 .category-dropdown-bar {
   display: flex;
   flex-wrap: wrap;
@@ -398,26 +399,44 @@ h1.masthead {
 }
 
 .category-dropdown-bar select {
-  background-color: var(--paper-raised);
-  color: var(--ink);
+  /* Slightly darker background tone (#DFDBD0) relative to page background (#ECE9DF) */
+  background-color: #DFDBD0;
+  color: #000000;
+  font-family: var(--font-ui);
   font-weight: 600;
-  border: 1px solid var(--rule-strong);
-  box-shadow: 3px 3px 7px var(--paper-shadow-hi), -3px -3px 7px var(--paper-shadow-lo);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='7'><path d='M0 0L5 7L10 0Z' fill='%2323221E'/></svg>");
+  font-size: 0.82rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius);
+  
+  /* Soft neomorphic outer shadow */
+  box-shadow: 4px 4px 8px var(--paper-shadow-hi), -4px -4px 8px #FFFFFF;
+  
+  /* Single black down arrow on the far right */
+  appearance: none;
+  -webkit-appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='7'><path d='M0 0L5 7L10 0Z' fill='%23000000'/></svg>");
+  
+  padding: 0.45rem 2.1rem 0.45rem 0.65rem;
   width: auto;
   min-width: 110px;
   max-width: 145px;
   text-overflow: ellipsis;
-  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .category-dropdown-bar select:hover {
-  background-color: #E5E1D3;
-  border-color: var(--accent);
+  background-color: #D6D2C5;
+  box-shadow: 2px 2px 5px var(--paper-shadow-hi), -2px -2px 5px #FFFFFF;
 }
 
+.category-dropdown-bar select:active,
 .category-dropdown-bar select:focus {
-  border-color: var(--accent-deep);
+  background-color: #D2CEC1;
+  box-shadow: inset 2px 2px 5px var(--paper-shadow-hi), inset -2px -2px 5px #FFFFFF;
+  outline: none;
 }
 
 body.nav-collapsed .hero {
