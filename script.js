@@ -66,6 +66,18 @@ const CATEGORY_GROUPS = [
 // ==========================================================================
 
 /**
+ * Redirects user to index.html unless they are already on the homepage.
+ */
+function navigateToHomepage() {
+  const currentPath = window.location.pathname;
+  const isHomepage = currentPath.endsWith('index.html') || currentPath.endsWith('/') || currentPath === '';
+  
+  if (!isHomepage) {
+    window.location.href = 'index.html';
+  }
+}
+
+/**
  * Resets all category dropdowns to default placeholder state & blurs focus.
  */
 function resetAllCategoryDropdowns() {
@@ -180,7 +192,8 @@ function renderCategoryDropdowns() {
 }
 
 /**
- * Populates state selector dropdowns and synchronizes their selections.
+ * Populates state selector dropdowns, sets Oklahoma as active/default,
+ * disables all other states, and handles navigation to the homepage.
  */
 function initStates() {
   const selects = [
@@ -189,14 +202,17 @@ function initStates() {
   ].filter(Boolean);
 
   selects.forEach(select => {
-    select.innerHTML = STATES.map(st => 
-      `<option value="${st}" ${st === 'Oklahoma' ? 'selected' : ''}>${st}</option>`
-    ).join('');
+    select.innerHTML = STATES.map(st => {
+      const isOklahoma = st === 'Oklahoma';
+      return `<option value="${st}" ${isOklahoma ? 'selected' : 'disabled'}>${st}</option>`;
+    }).join('');
 
-    select.addEventListener('change', (e) => {
-      const val = e.target.value;
-      selects.forEach(s => s.value = val);
-    });
+    const handleStateInteraction = () => {
+      navigateToHomepage();
+    };
+
+    select.addEventListener('change', handleStateInteraction);
+    select.addEventListener('click', handleStateInteraction);
   });
 }
 
