@@ -175,7 +175,6 @@ select.neo-select,
 select.ink-select {
   font-family: var(--font-ui);
   font-size: 0.82rem;
-  /* Top/Bottom padding matched to 0.6rem to perfectly match .neo-btn height */
   padding: 0.6rem 2.1rem 0.6rem 0.75rem;
   border-radius: var(--radius);
   cursor: pointer;
@@ -184,6 +183,12 @@ select.ink-select {
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='7'><path d='M0 0L5 7L10 0Z' fill='%23FFFFFF'/></svg>");
+}
+
+/* Styling for Disabled Dropdown Options */
+select option:disabled {
+  color: var(--ink-faint) !important;
+  background-color: #2D2C29 !important;
 }
 
 .icon-gear {
