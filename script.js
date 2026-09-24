@@ -103,7 +103,7 @@ function handleCategoryChange(selectEl) {
 }
 
 /**
- * Builds HTML for category dropdown `<select>` elements.
+ * Builds HTML for category dropdown `<select>` elements with hidden header option.
  */
 function buildCategorySelectHTML(group, selectClass = "ink-select") {
   const options = group.items
@@ -112,7 +112,7 @@ function buildCategorySelectHTML(group, selectClass = "ink-select") {
 
   return `
     <select class="${selectClass}" onchange="handleCategoryChange(this)" aria-label="${group.title} Category">
-      <option value="" selected disabled>${group.title}</option>
+      <option value="" selected disabled hidden>${group.title}</option>
       ${options}
     </select>`;
 }
@@ -273,7 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('pageshow', () => {
   resetAllCategoryDropdowns();
   
-  // Ensure document activeElement drops focus
   if (document.activeElement && document.activeElement.tagName === 'SELECT') {
     document.activeElement.blur();
   }
