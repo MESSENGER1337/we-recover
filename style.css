@@ -197,6 +197,11 @@ select option:disabled {
   display: block;
 }
 
+/* Hides disabled placeholder options inside expanded select dropdown lists */
+select option[hidden] {
+  display: none !important;
+}
+
 /* ==========================================================================
    4. FIXED HEADER BAR
    ========================================================================== */
