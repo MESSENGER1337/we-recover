@@ -133,7 +133,7 @@ button {
   white-space: nowrap;
   background: var(--paper-raised);
   box-shadow: 4px 4px 9px var(--paper-shadow-hi), -4px -4px 9px var(--paper-shadow-lo);
-  transition: box-shadow 0.15s ease, background 0.15s ease;
+  transition: box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .neo-btn:active {
@@ -168,6 +168,17 @@ select.ink-select:hover {
 
 .ink-btn:active {
   box-shadow: inset 3px 3px 7px rgba(0, 0, 0, 0.5), inset -3px -3px 7px rgba(255, 255, 255, 0.05);
+}
+
+/* "MY STUFF" Highlighted / Active Button Toggle State */
+.my-stuff-btn.active {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #FFFFFF !important;
+}
+
+.my-stuff-btn.active:hover {
+  background-color: var(--accent-deep) !important;
 }
 
 /* Custom Select Dropdowns Base */
@@ -695,7 +706,10 @@ main {
 }
 
 .more-btn-wrapper {
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
   margin-top: 0.5rem;
 }
 
