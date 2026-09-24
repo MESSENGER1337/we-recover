@@ -68,13 +68,13 @@ const CATEGORY_GROUPS = [
 /**
  * Builds HTML for category dropdown `<select>` elements.
  */
-function buildCategorySelectHTML(group) {
+function buildCategorySelectHTML(group, selectClass = "ink-select") {
   const options = group.items
     .map(item => `<option value="${item.url}">${item.label}</option>`)
     .join('');
 
   return `
-    <select class="ink-select" onchange="if(this.value) window.location.href=this.value" aria-label="${group.title} Category">
+    <select class="${selectClass}" onchange="if(this.value) window.location.href=this.value" aria-label="${group.title} Category">
       <option value="" selected disabled>${group.title}</option>
       ${options}
     </select>`;
@@ -123,21 +123,21 @@ function renderCategoryDropdowns() {
   const bpCategories = document.getElementById('bpCategories');
   const heroCategoryNav = document.getElementById('heroCategoryNav');
 
-  // Populate Burger Menu Categories
+  // Populate Burger Menu Categories (dark ink selects)
   if (bpCategories) {
     let html = `<p class="bp-label">CATEGORIES</p>`;
     CATEGORY_GROUPS.forEach(group => {
       html += `<div class="bp-select-row-item">
-        ${buildCategorySelectHTML(group)}
+        ${buildCategorySelectHTML(group, 'ink-select')}
       </div>`;
     });
     bpCategories.innerHTML = html;
   }
 
-  // Populate Hero Category Bar
+  // Populate Hero Category Bar (light neomorphic selects)
   if (heroCategoryNav) {
     heroCategoryNav.innerHTML = CATEGORY_GROUPS
-      .map(group => buildCategorySelectHTML(group))
+      .map(group => buildCategorySelectHTML(group, 'neo-select'))
       .join('');
   }
 }
