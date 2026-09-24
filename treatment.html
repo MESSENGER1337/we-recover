@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>We Recover - Treatment Directory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700;900&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- <style>
+.directory-section {
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+.directory-section h3 {
+  font-family: var(--font-display, serif);
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--rule, #ccc);
+  padding-bottom: 0.4rem;
+}
+.facility-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.facility-card {
+  border-radius: var(--radius, 8px);
+  background: var(--paper-raised, #f4f3ef);
+  box-shadow: 3px 3px 7px var(--paper-shadow-hi, rgba(0,0,0,0.08)), -3px -3px 7px var(--paper-shadow-lo, rgba(255,255,255,0.7));
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+.facility-header {
+  padding: 0.9rem 1.2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+.facility-header:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+.facility-name {
+  font-weight: 700;
+  font-family: var(--font-ui, sans-serif);
+}
+.facility-city, .facility-specialty, .facility-rating {
+  font-size: 0.88rem;
+  color: var(--ink-faint, #555);
+}
+.facility-rating {
+  font-weight: 600;
+  color: #d97706;
+}
+.accordion-icon {
+  font-size: 0.8rem;
+  transition: transform 0.2s ease;
+}
+.facility-card.open .accordion-icon {
+  transform: rotate(180deg);
+}
+.facility-body {
+  display: none;
+  padding: 1.2rem;
+  border-top: 1px dashed var(--rule, #ccc);
+  background: var(--paper, #faf9f5);
+  font-size: 0.92rem;
+}
+.facility-card.open .facility-body {
+  display: block;
+}
+.facility-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem 1.5rem;
+  margin-bottom: 1.2rem;
+}
+.detail-item strong {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint, #666);
+  margin-bottom: 0.2rem;
+}
+.more-btn-wrapper {
+  text-align: right;
+  margin-top: 0.5rem;
+}
+@media (max-width: 680px) {
+  .facility-header {
+    grid-template-columns: 1fr 1fr auto;
+    row-gap: 0.4rem;
+  }
+  .facility-specialty {
+    grid-column: span 2;
+  }
+}
+</style> -->
+</head>
+<body>
+
+<div class="eink-flash" id="einkFlash"></div>
+
+<header id="site-bar" class="minimal-bar">
+  <div class="bar-inner">
+    <div class="bar-compact" id="barCompact" style="display: flex;">
+      <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="index.html" class="compact-title" style="text-decoration:none;">WE RECOVER</a>
+    </div>
+  </div>
+</header>
+
+<div id="bar-spacer"></div>
+
+<div class="overlay" id="overlay"></div>
+<aside class="burger-panel" id="burgerPanel" aria-label="Site menu">
+  <p class="bp-title"><a href="index.html" style="text-decoration:none; color:inherit;">WE RECOVER</a></p>
+
+  <div class="bp-section">
+    <p class="bp-label">LOCATION</p>
+    <div class="bp-select-row">
+      <select class="ink-select" id="stateSelectMobile" aria-label="Select your state"></select>
+    </div>
+  </div>
+
+  <!-- Dynamic Container for Account & Navigation -->
+  <div class="bp-section" id="bpAccountNav"></div>
+
+  <!-- Dynamic Container for Categories -->
+  <div class="bp-section" id="bpCategories"></div>
+</aside>
+
+<main>
+  <div class="blank-page" style="max-width: 860px;">
+    <h2>Treatment Directory</h2>
+    <p style="margin-bottom: 2rem;">Browse local medical detox providers, inpatient recovery facilities, and structured sober living homes.</p>
+
+    <!-- DETOX CENTERS -->
+    <section class="directory-section">
+      <h3>Detox Centers</h3>
+      <div class="facility-list">
+
+        <div class="facility-card">
+          <div class="facility-header" onclick="toggleFacility(this)">
+            <span class="facility-name">ClearPath Medical Detox</span>
+            <span class="facility-city">Oklahoma City, OK</span>
+            <span class="facility-specialty">Acute Medical Detox</span>
+            <span class="facility-rating">4.8 / 5 &#9733;</span>
+            <span class="accordion-icon">&#9660;</span>
+          </div>
+          <div class="facility-body">
+            <div class="facility-details-grid">
+              <div class="detail-item"><strong>Facility Name</strong> ClearPath Medical Detox</div>
+              <div class="detail-item"><strong>Type</strong> Medical Detox Center</div>
+              <div class="detail-item"><strong>Address</strong> 1400 NW 10th St, Oklahoma City, OK 73106</div>
+              <div class="detail-item"><strong>Phone</strong> (405) 555-0192</div>
+              <div class="detail-item"><strong>Website</strong> <a href="https://example.com" target="_blank" rel="noopener">clearpathdetox.org</a></div>
+              <div class="detail-item"><strong>Specialty</strong> 24/7 Medically Supervised Withdrawal</div>
+              <div class="detail-item"><strong>Rating</strong> 4.8 / 5 &#9733;</div>
+            </div>
+            <div class="more-btn-wrapper">
+              <a href="blank.html" class="neo-btn ink-btn" style="text-decoration:none; font-size:0.85rem; padding:0.4rem 0.9rem;">MORE &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="facility-card">
+          <div class="facility-header" onclick="toggleFacility(this)">
+            <span class="facility-name">Red River Stabilization</span>
+            <span class="facility-city">Norman, OK</span>
+            <span class="facility-specialty">Alcohol & Opiate Detox</span>
+            <span class="facility-rating">4.5 / 5 &#9733;</span>
+            <span class="accordion-icon">&#9660;</span>
+          </div>
+          <div class="facility-body">
+            <div class="facility-details-grid">
+              <div class="detail-item"><strong>Facility Name</strong> Red River Stabilization Unit</div>
+              <div class="detail-item"><strong>Type</strong> Medical Detox Center</div>
+              <div class="detail-item"><strong>Address</strong> 802 Classen Blvd, Norman, OK 73071</div>
+              <div class="detail-item"><strong>Phone</strong> (405) 555-0144</div>
+              <div class="detail-item"><strong>Website</strong> <a href="https://example.com" target="_blank" rel="noopener">redriverdetox.com</a></div>
+              <div class="detail-item"><strong>Specialty</strong> Rapid Stabilization & Tapering</div>
+              <div class="detail-item"><strong>Rating</strong> 4.5 / 5 &#9733;</div>
+            </div>
+            <div class="more-btn-wrapper">
+              <a href="blank.html" class="neo-btn ink-btn" style="text-decoration:none; font-size:0.85rem; padding:0.4rem 0.9rem;">MORE &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- REHAB FACILITIES -->
+    <section class="directory-section">
+      <h3>Rehab Facilities</h3>
+      <div class="facility-list">
+
+        <div class="facility-card">
+          <div class="facility-header" onclick="toggleFacility(this)">
+            <span class="facility-name">Oakridge Recovery Center</span>
+            <span class="facility-city">Tulsa, OK</span>
+            <span class="facility-specialty">Residential Inpatient</span>
+            <span class="facility-rating">4.9 / 5 &#9733;</span>
+            <span class="accordion-icon">&#9660;</span>
+          </div>
+          <div class="facility-body">
+            <div class="facility-details-grid">
+              <div class="detail-item"><strong>Facility Name</strong> Oakridge Recovery Center</div>
+              <div class="detail-item"><strong>Type</strong> Residential Rehab Facility</div>
+              <div class="detail-item"><strong>Address</strong> 3201 E 21st St, Tulsa, OK 74114</div>
+              <div class="detail-item"><strong>Phone</strong> (918) 555-0188</div>
+              <div class="detail-item"><strong>Website</strong> <a href="https://example.com" target="_blank" rel="noopener">oakridgerecovery.org</a></div>
+              <div class="detail-item"><strong>Specialty</strong> 30-90 Day Inpatient & Dual Diagnosis</div>
+              <div class="detail-item"><strong>Rating</strong> 4.9 / 5 &#9733;</div>
+            </div>
+            <div class="more-btn-wrapper">
+              <a href="blank.html" class="neo-btn ink-btn" style="text-decoration:none; font-size:0.85rem; padding:0.4rem 0.9rem;">MORE &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="facility-card">
+          <div class="facility-header" onclick="toggleFacility(this)">
+            <span class="facility-name">Prairie Hope Wellness</span>
+            <span class="facility-city">Edmond, OK</span>
+            <span class="facility-specialty">Outpatient & IOP</span>
+            <span class="facility-rating">4.6 / 5 &#9733;</span>
+            <span class="accordion-icon">&#9660;</span>
+          </div>
+          <div class="facility-body">
+            <div class="facility-details-grid">
+              <div class="detail-item"><strong>Facility Name</strong> Prairie Hope Wellness</div>
+              <div class="detail-item"><strong>Type</strong> Outpatient Rehab Facility</div>
+              <div class="detail-item"><strong>Address</strong> 510 S Bryant Ave, Edmond, OK 73034</div>
+              <div class="detail-item"><strong>Phone</strong> (405) 555-0167</div>
+              <div class="detail-item"><strong>Website</strong> <a href="https://example.com" target="_blank" rel="noopener">prairiehope.com</a></div>
+              <div class="detail-item"><strong>Specialty</strong> Intensive Outpatient & MAT Support</div>
+              <div class="detail-item"><strong>Rating</strong> 4.6 / 5 &#9733;</div>
+            </div>
+            <div class="more-btn-wrapper">
+              <a href="blank.html" class="neo-btn ink-btn" style="text-decoration:none; font-size:0.85rem; padding:0.4rem 0.9rem;">MORE &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SOBER LIVING -->
+    <section class="directory-section">
+      <h3>Sober Living</h3>
+      <div class="facility-list">
+
+        <div class="facility-card">
+          <div class="facility-header" onclick="toggleFacility(this)">
+            <span class="facility-name">Anchor House Residency</span>
+            <span class="facility-city">Oklahoma City, OK</span>
+            <span class="facility-specialty">Structured Men's Living</span>
+            <span class="facility-rating">4.7 / 5 &#9733;</span>
+            <span class="accordion-icon">&#9660;</span>
+          </div>
+          <div class="facility-body">
+            <div class="facility-details-grid">
+              <div class="detail-item"><strong>Facility Name</strong> Anchor House Residency</div>
+              <div class="detail-item"><strong>Type</strong> Sober Living Home</div>
+              <div class="detail-item"><strong>Address</strong> 2218 N Penn Ave, Oklahoma City, OK 73107</div>
+              <div class="detail-item"><strong>Phone</strong> (405) 555-0123</div>
+              <div class="detail-item"><strong>Website</strong> <a href="https://example.com" target="_blank" rel="noopener">anchorsoberliving.org</a></div>
+              <div class="detail-item"><strong>Specialty</strong> Peer Accountability & Employment Navigation</div>
+              <div class="detail-item"><strong>Rating</strong> 4.7 / 5 &#9733;</div>
+            </div>
+            <div class="more-btn-wrapper">
+              <a href="blank.html" class="neo-btn ink-btn" style="text-decoration:none; font-size:0.85rem; padding:0.4rem 0.9rem;">MORE &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="facility-card">
+          <div class="facility-header" onclick="toggleFacility(this)">
+            <span class="facility-name">New Horizon Women's House</span>
+            <span class="facility-city">Broken Arrow, OK</span>
+            <span class="facility-specialty">Structured Women's Living</span>
+            <span class="facility-rating">4.8 / 5 &#9733;</span>
+            <span class="accordion-icon">&#9660;</span>
+          </div>
+          <div class="facility-body">
+            <div class="facility-details-grid">
+              <div class="detail-item"><strong>Facility Name</strong> New Horizon Women's House</div>
+              <div class="detail-item"><strong>Type</strong> Sober Living Home</div>
+              <div class="detail-item"><strong>Address</strong> 1102 S Main St, Broken Arrow, OK 74012</div>
+              <div class="detail-item"><strong>Phone</strong> (918) 555-0155</div>
+              <div class="detail-item"><strong>Website</strong> <a href="https://example.com" target="_blank" rel="noopener">newhorizonba.org</a></div>
+              <div class="detail-item"><strong>Specialty</strong> Trauma-Informed Transitional Housing</div>
+              <div class="detail-item"><strong>Rating</strong> 4.8 / 5 &#9733;</div>
+            </div>
+            <div class="more-btn-wrapper">
+              <a href="blank.html" class="neo-btn ink-btn" style="text-decoration:none; font-size:0.85rem; padding:0.4rem 0.9rem;">MORE &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <nav class="footer-links" aria-label="Footer Navigation">
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="get-involved.html">Get Involved</a>
+    </nav>
+    <p class="footer-credit">Est. 2026 Messenger Media</p>
+  </div>
+</footer>
+
+<script>
+function toggleFacility(headerElem) {
+  const card = headerElem.parentElement;
+  card.classList.toggle('open');
+}
+</script>
+<script src="script.js"></script>
+</body>
+</html>
+
+
+<!-- 
+
+How to Edit or Add New Entries
+Open treatment.html in a text editor or code editor.
+
+Find the section where you want to add an entry (Detox Centers, Rehab Facilities, or Sober Living).
+
+Copy and paste this template inside the corresponding <div class="facility-list"> container:
+
+
+<div class="facility-card">
+  <div class="facility-header" onclick="toggleFacility(this)">
+    <span class="facility-name">Facility Name Here</span>
+    <span class="facility-city">City, State</span>
+    <span class="facility-specialty">Specialty Focus</span>
+    <span class="facility-rating">4.5 / 5 &#9733;</span>
+    <span class="accordion-icon">&#9660;</span>
+  </div>
+  <div class="facility-body">
+    <div class="facility-details-grid">
+      <div class="detail-item"><strong>Facility Name</strong> Facility Name Here</div>
+      <div class="detail-item"><strong>Type</strong> Facility Type</div>
+      <div class="detail-item"><strong>Address</strong> Full Street Address</div>
+      <div class="detail-item"><strong>Phone</strong> (555) 555-0000</div>
+      <div class="detail-item"><strong>Website</strong> <a href="https://example.com" target="_blank">website.com</a></div>
+      <div class="detail-item"><strong>Specialty</strong> Specialty Focus</div>
+      <div class="detail-item"><strong>Rating</strong> 4.5 / 5 &#9733;</div>
+    </div>
+    <div class="more-btn-wrapper">
+      <a href="blank.html" class="neo-btn ink-btn" style="text-decoration:none; font-size:0.85rem; padding:0.4rem 0.9rem;">MORE &rarr;</a>
+    </div>
+  </div>
+</div>
+
+
+Update the fields in both the top facility-header bar (visible when collapsed) and the facility-body grid (visible when expanded).
+
+Save the file. No additional JavaScript setup or compilation is required.
+
+
+-->

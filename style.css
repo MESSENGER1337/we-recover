@@ -320,6 +320,99 @@ main{ position:relative; z-index:1; max-width: 1180px; margin: 0 auto; padding: 
 .blank-page h2{ font-family: var(--font-display); font-weight:800; font-size: 1.8rem; margin: 0 0 .6rem; }
 .blank-page p{ color: var(--ink-soft); margin: 0 0 1.8rem; }
 
+/* ============ TREATMENT DIRECTORY ============ */
+.directory-section {
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+.directory-section h3 {
+  font-family: var(--font-display, serif);
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--rule, #ccc);
+  padding-bottom: 0.4rem;
+}
+.facility-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.facility-card {
+  border-radius: var(--radius, 8px);
+  background: var(--paper-raised, #f4f3ef);
+  box-shadow: 3px 3px 7px var(--paper-shadow-hi, rgba(0,0,0,0.08)), -3px -3px 7px var(--paper-shadow-lo, rgba(255,255,255,0.7));
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+.facility-header {
+  padding: 0.9rem 1.2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+.facility-header:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+.facility-name {
+  font-weight: 700;
+  font-family: var(--font-ui, sans-serif);
+}
+.facility-city, .facility-specialty, .facility-rating {
+  font-size: 0.88rem;
+  color: var(--ink-faint, #555);
+}
+.facility-rating {
+  font-weight: 600;
+  color: #d97706;
+}
+.accordion-icon {
+  font-size: 0.8rem;
+  transition: transform 0.2s ease;
+}
+.facility-card.open .accordion-icon {
+  transform: rotate(180deg);
+}
+.facility-body {
+  display: none;
+  padding: 1.2rem;
+  border-top: 1px dashed var(--rule, #ccc);
+  background: var(--paper, #faf9f5);
+  font-size: 0.92rem;
+}
+.facility-card.open .facility-body {
+  display: block;
+}
+.facility-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem 1.5rem;
+  margin-bottom: 1.2rem;
+}
+.detail-item strong {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint, #666);
+  margin-bottom: 0.2rem;
+}
+.more-btn-wrapper {
+  text-align: right;
+  margin-top: 0.5rem;
+}
+@media (max-width: 680px) {
+  .facility-header {
+    grid-template-columns: 1fr 1fr auto;
+    row-gap: 0.4rem;
+  }
+  .facility-specialty {
+    grid-column: span 2;
+  }
+}
+
 /* ============ FOOTER ============ */
 footer.site-footer{
   border-top: 1px solid var(--rule);
