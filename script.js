@@ -114,12 +114,14 @@
     overlay.classList.add('open');
     burgerBtn.classList.add('open');
     burgerBtn.setAttribute('aria-expanded','true');
+    document.body.classList.add('no-scroll');
   }
   function closeBurger(){
     burgerPanel.classList.remove('open');
     overlay.classList.remove('open');
     burgerBtn.classList.remove('open');
     burgerBtn.setAttribute('aria-expanded','false');
+    document.body.classList.remove('no-scroll');
   }
   if(burgerBtn){
     burgerBtn.addEventListener('click', function(){
@@ -154,11 +156,7 @@
   var blankBack = document.getElementById('blankBack');
   if(blankBack){
     blankBack.addEventListener('click', function(){
-      if(document.referrer && window.history.length > 1){
-        window.history.back();
-      } else {
-        window.location.href = 'index.html';
-      }
+      window.location.href = 'index.html';
     });
   }
 
