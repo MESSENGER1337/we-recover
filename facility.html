@@ -15,6 +15,13 @@
     padding: 1rem 0 3rem;
   }
 
+  .facility-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+  }
+
   .facility-back-link {
     display: inline-block;
     font-family: var(--font-ui);
@@ -24,7 +31,6 @@
     text-transform: uppercase;
     color: var(--accent-deep);
     text-decoration: none;
-    margin-bottom: 0.4rem;
     transition: color 0.15s ease;
   }
 
@@ -244,7 +250,11 @@
 <main>
   <div class="facility-container">
     
-    <a href="treatment.html" class="facility-back-link">&larr; Rehab Facilities</a>
+    <div class="facility-top-bar">
+      <a href="treatment.html" class="facility-back-link">&larr; Rehab Facilities</a>
+      <button type="button" class="neo-btn ink-btn my-stuff-btn" onclick="toggleMyStuff(this)" style="font-size:0.85rem; padding:0.4rem 0.9rem;">MY STUFF +</button>
+    </div>
+
     <h1 class="facility-title">GRAND Mental Health Addiction Recovery Center</h1>
 
     <div class="facility-bio-box neo-pressed">
